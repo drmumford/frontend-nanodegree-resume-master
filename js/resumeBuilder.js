@@ -17,7 +17,7 @@ var work = {
         {
             "employer" : "TCNI",
             "title" : "Sr. Software Engineer",
-            "location" : "Chicago, IL",
+            "location" : "Germantown, MD",
             "dates" : "March 2003 - March 2004",
             "description" : "Developed SW for the US Navy."
         },
@@ -31,9 +31,9 @@ var work = {
         {
             "employer" : "GreenHill",
             "title" : "Sr. Software Engineer",
-            "location" : "Dallas, TX",
+            "location" : "Germantown, MD",
             "dates" : "March 2006 - June 2011",
-            "description" : "Developed financial Performance Measurement applications."
+            "description" : "Developed investment performance measurement applications."
         }
     ]
 }
@@ -98,8 +98,8 @@ var education = {
         {
             "name" : "University of Vermont",
             "location" : "Burlington, VT",
-            "degree" : "Foundation Engineering Courses",
-            "majors" : [""],
+            "degree" : "Engineering Foundation Courses",
+            "majors" : ["Electrical Engineering"],
             "dates" : "1983",
             "url" : "http://www.uvm.edu"
         },
@@ -148,18 +148,17 @@ projects.display = function() {
     }
 }
 
-projects.display(); // voila!
+projects.display();
 
 // Education ------------------
-$("#education").append(HTMLschoolStart);
+education.display = function() {
+    for (school in education.schools)
+    {
+        displaySchool(school);
+    }
+}
 
-var formattedSchoolName =  HTMLworkEmployer.replace("%data%", education.schools[0].name);
-var formattedSchoolDegree =  HTMLworkTitle.replace("%data%", education.schools[0].degree);
-$(".education-entry").append(formattedSchoolName + formattedSchoolDegree);
-
-formattedSchoolName =  HTMLworkEmployer.replace("%data%", education.schools[1].name);
-formattedSchoolDegree =  HTMLworkTitle.replace("%data%", education.schools[1].degree);
-$(".education-entry").append(formattedSchoolName + formattedSchoolDegree);
+education.display();
 
 // Map ------------------------
 $("#mapDiv").append(googleMap);

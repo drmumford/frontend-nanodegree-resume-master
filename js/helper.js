@@ -135,7 +135,6 @@ function initializeMap() {
       locations.push(work.jobs[job].location);
     }
 
-    console.log(locations); // DRM added.
     return locations;
   }
 
@@ -146,10 +145,9 @@ function initializeMap() {
   */
   function createMapMarker(placeData) {
 
-    console.log("In createMapMarker()..."); // DRM added.
     // The next lines save location data from the search result object to local variables
-    var lat = placeData.geometry.location.k;  // latitude from the place service
-    var lon = placeData.geometry.location.D;  // longitude from the place service
+    var lat = placeData.geometry.location.lat();  // latitude from the place service
+    var lon = placeData.geometry.location.lng();  // longitude from the place service
     var name = placeData.formatted_address;   // name of the place from the place service
     var bounds = window.mapBounds;            // current boundaries of the map window
 
@@ -172,8 +170,6 @@ function initializeMap() {
       // your code goes here!
     });
 
-    console.log("Before adding pin: " + bounds); // DRM added.
-
     // this is where the pin actually gets added to the map.
     // bounds.extend() takes in a map location object
     bounds.extend(new google.maps.LatLng(lat, lon));
@@ -181,7 +177,6 @@ function initializeMap() {
     map.fitBounds(bounds);
     // center the map
     map.setCenter(bounds.getCenter());
-    console.log("Done adding pin"); // DRM added.
   }
 
   /*
@@ -189,10 +184,7 @@ function initializeMap() {
   If so, it creates a new map marker for that location.
   */
   function callback(results, status) {
-    console.log("In callback(" + status + ") ..."); // DRM added.
-    console.log(results[0]); // DRM added.
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-      console.log("Status OK");
       createMapMarker(results[0]);
     }
   }
@@ -203,12 +195,10 @@ function initializeMap() {
   */
   function pinPoster(locations) {
 
-    console.log("In pinPoster() ..."); // DRM added.
     // creates a Google place search service object. PlacesService does the work of
     // actually searching for location data.
     var service = new google.maps.places.PlacesService(map);
 
-    console.log("After creating service ..."); // DRM added.
     // Iterates through the array of locations, creates a search object for each location
     for (var place in locations) {
 
@@ -217,11 +207,9 @@ function initializeMap() {
         query: locations[place]
       };
 
-      console.log("Before textSearch [" + locations[place] + "] ..."); // DRM added.
       // Actually searches the Google Maps API for location data and runs the callback
       // function with the search results after each search.
       service.textSearch(request, callback);
-      console.log("After textSearch ..."); // DRM added.
     }
   }
 
@@ -367,6 +355,29 @@ function displayProject(index) {
     image = image.replace("%alt%", projects.projects[index].imagesAlt[i]); // add alt text; come on, man!
     $(".project-entry:last").append(image);
   };
+}
+
+//
+// Add the school whose index in the education.schools array matches the given index.
+//
+function displaySchool(index) {
+
+  // Add a school header; each school gets it own header.
+  $("#education").append(HTMLschoolStart);
+
+  // Add this school's information.
+  var formattedSchoolName =  HTMLschoolName.replace("%data%", education.schools[index].name);
+  var formattedSchoolDegree =  HTMLschoolDegree.replace("%data%", education.schools[index].degree);
+  $(".education-entry:last").append(formattedSchoolName + formattedSchoolDegree);
+
+  var dates = HTMLschoolDates.replace("%data%", education.schools[index].dates);
+  $(".education-entry:last").append(dates);
+
+  var location = HTMLschoolLocation.replace("%data%", education.schools[index].location);
+  $(".education-entry:last").append(location);
+
+  var major = HTMLschoolMajor.replace("%data%", education.schools[index].majors);
+  $(".education-entry:last").append(major);
 }
 
 // Function for internationalization exercise.
