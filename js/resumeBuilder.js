@@ -17,7 +17,7 @@ var work = {
         {
             "employer" : "TCNI",
             "title" : "Sr. Software Engineer",
-            "location" : "Germantown, MD",
+            "location" : "Chicago, IL",
             "dates" : "March 2003 - March 2004",
             "description" : "Developed SW for the US Navy."
         },
@@ -31,9 +31,9 @@ var work = {
         {
             "employer" : "GreenHill",
             "title" : "Sr. Software Engineer",
-            "location" : "Germantown, MD",
+            "location" : "Dallas, TX",
             "dates" : "March 2006 - June 2011",
-            "description" : "Developed a financial Performance Measurement application."
+            "description" : "Developed financial Performance Measurement applications."
         }
     ]
 }
@@ -44,18 +44,28 @@ var projects = {
             "title" : "Project 1",
             "dates" : "6 weeks",
             "description" : "Project 1 description",
+
             "images" : [
-                "http://www.ironwood.com/Portfolio/images/logo-600.jpg",
-                "http://www.ironwood.com/Portfolio/images/kitty2-600.jpg"
+                "http://www.ironwoodlife.com/portfolio/images/kitty1-400.jpg",
+                "http://www.ironwoodlife.com/portfolio/images/kitty2-400.jpg"
+            ],
+            "imagesAlt" : [
+                "The BEFORE image of my first project",
+                "The AFTER image of my first project"
             ]
         },
         {
             "title" : "Project 2",
             "dates" : "6 weeks",
-            "description" : "Project 1 description",
+            "description" : "Project 2 description",
+
             "images" : [
-                "http://www.ironwood.com/Portfolio/images/logo-800.jpg",
-                "http://www.ironwood.com/Portfolio/images/kitty1-800.jpg"
+                "http://www.ironwoodlife.com/portfolio/images/kitty2-400.jpg",
+                "http://www.ironwoodlife.com/portfolio/images/kitty3-400.jpg"
+            ],
+            "imagesAlt" : [
+                "The BEFORE image of my second project",
+                "The AFTER image of my second project"
             ]
         }
     ]
@@ -76,7 +86,7 @@ var bio = {
         "location" : "Severna Park, MD"
     },
 
-    "bioPic" : "http://www.ironwoodlife.com/portfolio/images/logo-800.jpg",
+    "bioPic" : "http://www.ironwoodlife.com/portfolio/images/logo-400.jpg",
 
     "skills" : [
         "HTML", "JavaScript", "JQuery", "Bootstrap"
@@ -119,46 +129,26 @@ var education = {
     ]
 }
 
-var formattedName = HTMLheaderName.replace("%data%", bio.name);
-var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
-
-var formattedGeneric = HTMLcontactGeneric.replace("%contact%", bio.genericContact);
-formattedGeneric = formattedGeneric.replace("%data%", bio.genericData);
-
-var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
-var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
-var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-var formattedWelcomeMsg = HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage);
-
-var profilePicture = HTMLbioPic.replace("%data%", bio.bioPic);
-
-$("#topContacts").append(formattedGeneric);
-$("#topContacts").append(formattedMobile);
-$("#topContacts").append(formattedEmail);
-$("#topContacts").append(formattedTwitter);
-$("#topContacts").append(formattedGithub);
-$("#topContacts").append(formattedBlog);
-$("#topContacts").append(formattedLocation);
-
-$("#header").append(profilePicture);
-$("#header").append(formattedWelcomeMsg);
-
-// Skills ---------------------
-if (bio.skills.length > 0)
-{
-    addSkills(bio.skills);
-}
+// Resume Header  -------------
+addTitleAndContactInfo();
+addBio();
 
 // Work Experience ------------
 for (job in work.jobs)
 {
-    workExperienceForJob(job);
+    displayJob(job);
 }
+
+// Projects -------------------
+// Per the instructions, create a 'display' property to encapsulate how projects are displayed.
+projects.display = function() {
+    for (project in projects.projects)
+    {
+        displayProject(project);
+    }
+}
+
+projects.display(); // voila!
 
 // Education ------------------
 $("#education").append(HTMLschoolStart);
@@ -170,6 +160,9 @@ $(".education-entry").append(formattedSchoolName + formattedSchoolDegree);
 formattedSchoolName =  HTMLworkEmployer.replace("%data%", education.schools[1].name);
 formattedSchoolDegree =  HTMLworkTitle.replace("%data%", education.schools[1].degree);
 $(".education-entry").append(formattedSchoolName + formattedSchoolDegree);
+
+// Map ------------------------
+$("#mapDiv").append(googleMap);
 
 //
 // Internationalization Exercise.

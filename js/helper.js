@@ -40,7 +40,7 @@ var HTMLprojectStart = '<div class="project-entry"></div>';
 var HTMLprojectTitle = '<a href="#">%data%</a>';
 var HTMLprojectDates = '<div class="date-text">%data%</div>';
 var HTMLprojectDescription = '<p><br>%data%</p>';
-var HTMLprojectImage = '<img src="%data%">';
+var HTMLprojectImage = '<img src="%data%" alt="%alt%">';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
 var HTMLschoolName = '<a href="#">%data%';
@@ -57,7 +57,6 @@ var HTMLonlineURL = '<br><a href="#">%data%</a>';
 
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
-
 
 /*
 The International Name challenge in Lesson 2 where you'll create a function that will need
@@ -112,7 +111,6 @@ function initializeMap() {
   // <div id="map">, which is appended as part of an exercise late in the course.
   map = new google.maps.Map(document.querySelector('#map'), mapOptions);
 
-
   /*
   locationFinder() returns an array of every location string from the JSONs
   written for bio, education, and work.
@@ -137,6 +135,7 @@ function initializeMap() {
       locations.push(work.jobs[job].location);
     }
 
+    console.log(locations); // DRM added.
     return locations;
   }
 
@@ -147,6 +146,7 @@ function initializeMap() {
   */
   function createMapMarker(placeData) {
 
+    console.log("In createMapMarker()..."); // DRM added.
     // The next lines save location data from the search result object to local variables
     var lat = placeData.geometry.location.k;  // latitude from the place service
     var lon = placeData.geometry.location.D;  // longitude from the place service
@@ -172,6 +172,8 @@ function initializeMap() {
       // your code goes here!
     });
 
+    console.log("Before adding pin: " + bounds); // DRM added.
+
     // this is where the pin actually gets added to the map.
     // bounds.extend() takes in a map location object
     bounds.extend(new google.maps.LatLng(lat, lon));
@@ -179,6 +181,7 @@ function initializeMap() {
     map.fitBounds(bounds);
     // center the map
     map.setCenter(bounds.getCenter());
+    console.log("Done adding pin"); // DRM added.
   }
 
   /*
@@ -186,7 +189,10 @@ function initializeMap() {
   If so, it creates a new map marker for that location.
   */
   function callback(results, status) {
+    console.log("In callback(" + status + ") ..."); // DRM added.
+    console.log(results[0]); // DRM added.
     if (status == google.maps.places.PlacesServiceStatus.OK) {
+      console.log("Status OK");
       createMapMarker(results[0]);
     }
   }
@@ -197,10 +203,12 @@ function initializeMap() {
   */
   function pinPoster(locations) {
 
+    console.log("In pinPoster() ..."); // DRM added.
     // creates a Google place search service object. PlacesService does the work of
     // actually searching for location data.
     var service = new google.maps.places.PlacesService(map);
 
+    console.log("After creating service ..."); // DRM added.
     // Iterates through the array of locations, creates a search object for each location
     for (var place in locations) {
 
@@ -209,9 +217,11 @@ function initializeMap() {
         query: locations[place]
       };
 
+      console.log("Before textSearch [" + locations[place] + "] ..."); // DRM added.
       // Actually searches the Google Maps API for location data and runs the callback
       // function with the search results after each search.
       service.textSearch(request, callback);
+      console.log("After textSearch ..."); // DRM added.
     }
   }
 
@@ -224,7 +234,6 @@ function initializeMap() {
   // pinPoster(locations) creates pins on the map for each location in
   // the locations array
   pinPoster(locations);
-
 }
 
 /*
@@ -232,57 +241,138 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
+window.addEventListener('resize', function(e) {
   // Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+  map.fitBounds(mapBounds);
+});
+
 
 //
-// Add the work experience for the job whose index
-// in the work.jobs array matches the given index.
+// Resume Header, part I.
+// Provides name / title / contact information.
 //
-function workExperienceForJob(index) {
+function addTitleAndContactInfo() {
 
-    // Each job gets it own header.
-    $("#workExperience").append(HTMLworkStart);
+  var formattedName = HTMLheaderName.replace("%data%", bio.name);
+  var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+  $("#header").prepend(formattedRole);
+  $("#header").prepend(formattedName);
 
-    // Add this job's information.
-    var formattedWorkEmployer =  HTMLworkEmployer.replace("%data%", work.jobs[index].employer);
-    var formattedWorkTitle =  HTMLworkTitle.replace("%data%", work.jobs[index].title);
-    $(".work-entry:last").append(formattedWorkEmployer + formattedWorkTitle);
+  // Add a generic contact just for grins because it's there.
+  var formattedGeneric = HTMLcontactGeneric.replace("%contact%", bio.genericContact);
+  formattedGeneric = formattedGeneric.replace("%data%", bio.genericData);
+  $("#topContacts").append(formattedGeneric);
 
-    var formattedWorkDates = HTMLworkDates.replace("%data%", work.jobs[index].dates);
-    var formattedWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[index].location);
-    var formattedWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[index].description);
+  var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+  $("#topContacts").append(formattedMobile);
 
-    $(".work-entry:last").append(formattedWorkDates);
-    $(".work-entry:last").append(formattedWorkLocation);
-    $(".work-entry:last").append(formattedWorkDescription);
+  var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+  $("#topContacts").append(formattedEmail);
+
+  var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
+  $("#topContacts").append(formattedTwitter);
+
+  var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+  $("#topContacts").append(formattedGithub);
+
+  var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
+  $("#topContacts").append(formattedBlog);
+
+  var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+  $("#topContacts").append(formattedLocation);
+}
+
+//
+// Resume Header, part II.
+// Provides profile picture / short bio / skills catalog.
+//
+function addBio() {
+
+  var profilePicture = HTMLbioPic.replace("%data%", bio.bioPic);
+  $("#header").append(profilePicture);
+
+  var formattedWelcomeMsg = HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage);
+  $("#header").append(formattedWelcomeMsg);
+
+  addSkillsCatalog(bio.skills);
 }
 
 //
 // Add the skills in the given array to the resume.
 //
-function addSkills(skills) {
+function addSkillsCatalog(skills) {
 
-  // Add a skills section header.
-   $("#header").append(HTMLskillsStart);
+  // Add skills to the bio, if any.
+  if (bio.skills.length > 0)
+  {
+    // Add a skills section header.
+    $("#header").append(HTMLskillsStart);
 
-  // Add each skill individually.
-  for (i = 0; i < skills.length; i++) {
+    // Add each skill individually.
+    for (i = 0; i < skills.length; i++) {
       var skill = HTMLskills.replace("%data%", skills[i]);
       $("#skills").append(skill);
-  };
+    };
+  }
 }
 
+//
+// Add the job whose index in the work.jobs array matches the given index.
+//
+function displayJob(index) {
+
+    // Add a job header; each job gets it own header.
+    $("#workExperience").append(HTMLworkStart);
+
+    // Add this job's information.
+    var employer =  HTMLworkEmployer.replace("%data%", work.jobs[index].employer);
+    var title =  HTMLworkTitle.replace("%data%", work.jobs[index].title);
+    $(".work-entry:last").append(employer + title);
+
+    var dates = HTMLworkDates.replace("%data%", work.jobs[index].dates);
+    $(".work-entry:last").append(dates);
+
+    var location = HTMLworkLocation.replace("%data%", work.jobs[index].location);
+    $(".work-entry:last").append(location);
+
+    var description = HTMLworkDescription.replace("%data%", work.jobs[index].description);
+    $(".work-entry:last").append(description);
+}
+
+//
+// Add the project whose index in the projects.projects array matches the given index.
+//
+function displayProject(index) {
+
+  // Add a project header; each project gets it own header.
+  $("#projects").append(HTMLprojectStart); // var HTMLprojectStart = '<div class="project-entry"></div>';
+
+  // Add this job's information.
+  var title =  HTMLprojectTitle.replace("%data%", projects.projects[index].title);
+  $(".project-entry:last").append(title);
+
+  var dates = HTMLprojectDates.replace("%data%", projects.projects[index].dates);
+  $(".project-entry:last").append(dates);
+
+  var description = HTMLprojectDescription.replace("%data%", projects.projects[index].description);
+  $(".project-entry:last").append(description);
+
+  // Add images for the project, if any.
+  for (i = 0; i < projects.projects[index].images.length; i++) {
+    var image = HTMLprojectImage.replace("%data%", projects.projects[index].images[i]);
+    image = image.replace("%alt%", projects.projects[index].imagesAlt[i]); // add alt text; come on, man!
+    $(".project-entry:last").append(image);
+  };
+}
 
 // Function for internationalization exercise.
 function inName(name) {
 
+  // Parameter name is undefined until a global name variable is added!!
   console.log("In inName(" + name + ") ...");
 
   var finalName = name[0].toUpperCase();
