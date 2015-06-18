@@ -60,12 +60,13 @@ var googleMap = '<div id="map"></div>';
 
 
 /*
-The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
+The International Name challenge in Lesson 2 where you'll create a function that will need
+this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
 */
 $(document).ready(function() {
   $('button').click(function() {
     var iName = inName(name) || function(){};
-    $('#name').html(iName);  
+    $('#name').html(iName);
   });
 });
 
@@ -85,10 +86,8 @@ function logClicks(x,y) {
 }
 
 $(document).click(function(loc) {
-  // your code goes here!
+    logClicks(loc.pageX, loc.pageY);
 });
-
-
 
 /*
 This is the fun part. Here's where we generate the custom Google Map for the website.
@@ -241,3 +240,69 @@ Uncomment the code below when you're ready to implement a Google Map!
   // Make sure the map bounds get updated on page resize
 //  map.fitBounds(mapBounds);
 //});
+
+//
+// Add the work experience for the job whose index
+// in the work.jobs array matches the given index.
+//
+function workExperienceForJob(index) {
+
+    // Each job gets it own header.
+    $("#workExperience").append(HTMLworkStart);
+
+    // Add this job's information.
+    var formattedWorkEmployer =  HTMLworkEmployer.replace("%data%", work.jobs[index].employer);
+    var formattedWorkTitle =  HTMLworkTitle.replace("%data%", work.jobs[index].title);
+    $(".work-entry:last").append(formattedWorkEmployer + formattedWorkTitle);
+
+    var formattedWorkDates = HTMLworkDates.replace("%data%", work.jobs[index].dates);
+    var formattedWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[index].location);
+    var formattedWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[index].description);
+
+    $(".work-entry:last").append(formattedWorkDates);
+    $(".work-entry:last").append(formattedWorkLocation);
+    $(".work-entry:last").append(formattedWorkDescription);
+}
+
+//
+// Add the skills in the given array to the resume.
+//
+function addSkills(skills) {
+
+  // Add a skills section header.
+   $("#header").append(HTMLskillsStart);
+
+  // Add each skill individually.
+  for (i = 0; i < skills.length; i++) {
+      var skill = HTMLskills.replace("%data%", skills[i]);
+      $("#skills").append(skill);
+  };
+}
+
+
+// Function for internationalization exercise.
+function inName(name) {
+
+  console.log("In inName(" + name + ") ...");
+
+  var finalName = name[0].toUpperCase();
+  var capitalize = false;
+
+  for (var i = 1; i < name.length; i++) {
+      if (!capitalize) {
+          if (name[i] == " ") {
+              finalName = finalName + " ";
+              capitalize = true;
+          }
+          else { // Make lowercase.
+             finalName = finalName + name[i].toLowerCase();
+          }
+      }
+      else { // Make uppercase.
+          finalName = finalName + name[i].toUpperCase();
+      }
+  }
+
+  // Don't delete this line!
+  return finalName;
+}

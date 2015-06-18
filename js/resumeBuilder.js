@@ -4,15 +4,36 @@ var work = {
             "employer" : "Denro, Inc.",
             "title" : "Design Engineer",
             "location" : "Gaithersburg, MD",
-            "dates" : "8 years",
-            "description" : "I designed electrical circuits for Air Traffic Control systems."
+            "dates" : "Nov 1989 - Oct 1998",
+            "description" : "Designed electrical circuits for Air Traffic Control systems."
         },
         {
             "employer" : "Acterna, Inc.",
             "title" : "Software Engineer",
             "location" : "Germantown, MD",
-            "dates" : "5 years",
+            "dates" : "Nov 1998 - March 2003",
             "description" : "Developed SW for telecommunication test equipment."
+        },
+        {
+            "employer" : "TCNI",
+            "title" : "Sr. Software Engineer",
+            "location" : "Germantown, MD",
+            "dates" : "March 2003 - March 2004",
+            "description" : "Developed SW for the US Navy."
+        },
+        {
+            "employer" : "Sonix",
+            "title" : "Independent Contractor / Principal Software Engineer",
+            "location" : "Springfield, VA",
+            "dates" : "March 2004 - March 2006",
+            "description" : "Developed SW for Scanning Acoustic Microscopes."
+        },
+        {
+            "employer" : "GreenHill",
+            "title" : "Sr. Software Engineer",
+            "location" : "Germantown, MD",
+            "dates" : "March 2006 - June 2011",
+            "description" : "Developed a financial Performance Measurement application."
         }
     ]
 }
@@ -41,6 +62,8 @@ var projects = {
 }
 
 var bio = {
+    "genericContact" : "Google Transponder ID",
+    "genericData" : "ETO3715",
     "name" : "David R. Mumford",
     "role" : "Front-End Web Developer",
     "welcomeMessage" : "Welcome Message ...",
@@ -53,6 +76,8 @@ var bio = {
         "location" : "Severna Park, MD"
     },
 
+    "bioPic" : "http://www.ironwoodlife.com/portfolio/images/logo-800.jpg",
+
     "skills" : [
         "HTML", "JavaScript", "JQuery", "Bootstrap"
     ]
@@ -63,8 +88,8 @@ var education = {
         {
             "name" : "University of Vermont",
             "location" : "Burlington, VT",
-            "degree" : "",
-            "majors" : ["Engineering Foundation Courses"],
+            "degree" : "Foundation Engineering Courses",
+            "majors" : [""],
             "dates" : "1983",
             "url" : "http://www.uvm.edu"
         },
@@ -94,24 +119,25 @@ var education = {
     ]
 }
 
-/*
 var formattedName = HTMLheaderName.replace("%data%", bio.name);
 var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 $("#header").prepend(formattedRole);
 $("#header").prepend(formattedName);
 
+var formattedGeneric = HTMLcontactGeneric.replace("%contact%", bio.genericContact);
+formattedGeneric = formattedGeneric.replace("%data%", bio.genericData);
 
-//var formattedGeneric = HTMLcontactGeneric.replace("%data%", bio.generic);
 var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
 var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
 var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
 var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
 var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
 var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+var formattedWelcomeMsg = HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage);
 
-var bioPic = HTMLbioPic.replace("%data%", bio.bioPic);
+var profilePicture = HTMLbioPic.replace("%data%", bio.bioPic);
 
-//$("#topContacts").append(formattedGeneric);
+$("#topContacts").append(formattedGeneric);
 $("#topContacts").append(formattedMobile);
 $("#topContacts").append(formattedEmail);
 $("#topContacts").append(formattedTwitter);
@@ -119,23 +145,40 @@ $("#topContacts").append(formattedGithub);
 $("#topContacts").append(formattedBlog);
 $("#topContacts").append(formattedLocation);
 
-//$("#topContacts").append(bioPic);
+$("#header").append(profilePicture);
+$("#header").append(formattedWelcomeMsg);
 
-$("#workExperience").append(HTMLworkStart);
-//var formattedWorkStart =  HTMLworkStart.replace("%data", work.);
-var formattedWorkEmployer =  HTMLworkEmployer.replace("%data%", work.Employer);
-var formattedWorkTitle =  HTMLworkTitle.replace("%data%", work.Title);
-//var formattedWorkDates = HTMLworkDates.replace("%data", work.);
-//var formattedWorkLocation = HTMLworkLocation.replace("%data", work.);
-//var formattedWorkDescription = HTMLworkDescription.replace("%data", work.);
+// Skills ---------------------
+if (bio.skills.length > 0)
+{
+    addSkills(bio.skills);
+}
 
-$(".work-entry").append(formattedWorkEmployer + formattedWorkTitle);
-//$(".work-entry").append(formattedWorkTitle);
+// Work Experience ------------
+for (job in work.jobs)
+{
+    workExperienceForJob(job);
+}
 
-
+// Education ------------------
 $("#education").append(HTMLschoolStart);
 
-var formattedSchoolName =  HTMLworkEmployer.replace("%data%", education.name);
-var formattedSchoolDegree =  HTMLworkTitle.replace("%data%", education.degree);
+var formattedSchoolName =  HTMLworkEmployer.replace("%data%", education.schools[0].name);
+var formattedSchoolDegree =  HTMLworkTitle.replace("%data%", education.schools[0].degree);
 $(".education-entry").append(formattedSchoolName + formattedSchoolDegree);
-*/
+
+formattedSchoolName =  HTMLworkEmployer.replace("%data%", education.schools[1].name);
+formattedSchoolDegree =  HTMLworkTitle.replace("%data%", education.schools[1].degree);
+$(".education-entry").append(formattedSchoolName + formattedSchoolDegree);
+
+//
+// Internationalization Exercise.
+//
+
+// Enable the internationalize button.
+//$("#main").append(internationalizeButton);
+
+// Two important points missing from the instruction:
+//   1) the following global variable has to be declared, and
+//   2) it has to be declared after the HTMLheaderName has been added to the DOM.
+//var name = $('#name').text();
