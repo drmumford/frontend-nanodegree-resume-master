@@ -3,35 +3,35 @@ var work = {
         {
             "employer" : "Denro, Inc.",
             "title" : "Design Engineer",
-            "location" : "Gaithersburg, MD",
+            "location" : "Gaithersburg, MD, USA",
             "dates" : "Nov 1989 - Oct 1998",
             "description" : "Designed electrical circuits for Air Traffic Control systems."
         },
         {
             "employer" : "Acterna, Inc.",
             "title" : "Software Engineer",
-            "location" : "Germantown, MD",
+            "location" : "Germantown, MD, USA",
             "dates" : "Nov 1998 - March 2003",
             "description" : "Developed SW for telecommunication test equipment."
         },
         {
             "employer" : "TCNI",
             "title" : "Sr. Software Engineer",
-            "location" : "Germantown, MD",
+            "location" : "Germantown, MD, USA",
             "dates" : "March 2003 - March 2004",
             "description" : "Developed SW for the US Navy."
         },
         {
             "employer" : "Sonix",
             "title" : "Independent Contractor / Principal Software Engineer",
-            "location" : "Springfield, VA",
+            "location" : "Springfield, VA, USA",
             "dates" : "March 2004 - March 2006",
             "description" : "Developed SW for Scanning Acoustic Microscopes."
         },
         {
             "employer" : "GreenHill",
             "title" : "Sr. Software Engineer",
-            "location" : "Germantown, MD",
+            "location" : "Germantown, MD, USA",
             "dates" : "March 2006 - June 2011",
             "description" : "Developed investment performance measurement applications."
         }
@@ -72,75 +72,109 @@ var projects = {
 }
 
 var bio = {
-    "genericContact" : "Google Transponder ID",
-    "genericData" : "ETO3715",
+    "genericContact" : "",
+    "genericData" : "",
     "name" : "David R. Mumford",
     "role" : "Front-End Web Developer",
-    "welcomeMessage" : "Welcome Message ...",
+    "welcomeMessage" : "Results driven developer with a proven ability to create world-class products for my employers.",
 
     "contacts" : {
         "mobile" : "301.318.3516",
         "email" : "David.Royal.Mumford@gmail.com",
         "twitter" : "drmumford",
         "github" : "drmumford",
-        "location" : "Severna Park, MD"
+        "blog" : "", // no current blog.
+        "location" : "Severna Park, MD, USA"
     },
 
-    "bioPic" : "http://www.ironwoodlife.com/portfolio/images/logo-400.jpg",
+    "bioPic" : "http://www.ironwoodlife.com/profile.png",
 
     "skills" : [
-        "HTML", "JavaScript", "JQuery", "Bootstrap"
+
+        // Languages.
+        "C#", "VB.NET", "C++", "C", "XML", "HTML5", "CSS3", "JavaScript", "PHP", "SQL", "JQuery", "Bootstrap", "PostScript",
+
+        // Databases.
+        "SQL Server", "MySQL",
+
+        // Libraries and Tools.
+        "Visual Studio",  "MS Project",
+
+        "Apache",
+
+        "Integration Services (SSIS)", "Reporting Services (SSRS)", "Dundas Chart for Reporting Services",
+
+        ".NET Framework", "ASP.NET",
+
+        "GIT", "GitHub", "SVN", "TortoiseSVN", "CVS", "make",
+
+        "Agile (Scrum)",
+
+        "Windows", "Unix (Solaris)", "Linux (Red Hat)",
+
+        "LINQ",  "Serialization",
+
+        "Design Patterns", "OOAD",
+
+        "Digital/Analog Circuit Design",
+        "Project Management: Planning, Organizing, Controlling, Measuring",
     ]
 }
 
 var education = {
-    "schools" : [
+    "schools" : [ // NOTE: Leave location blank for online schools.
         {
             "name" : "University of Vermont",
+            "url" : "http://www.uvm.edu",
             "location" : "Burlington, VT",
-            "degree" : "Engineering Foundation Courses",
-            "majors" : ["Electrical Engineering"],
-            "dates" : "1983",
-            "url" : "http://www.uvm.edu"
+            "details" : "Foundation Engineering Courses",
+            "dates" : "1983 - 1985"
         },
         {
             "name" : "University of Maryland",
-            "location" : "College Park, MD",
-            "degree" : "BS",
-            "majors" : ["Electrical Engineering"],
-            "dates" : "1989",
-            "url" : "http://www.umd.edu"
-        }
-    ],
-
-    "OnlineCourses" : [
-        {
-            "title" : "Front-End Web Development",
-            "school" : "Udacity",
-            "dates" : "2015",
-            "url" : "http://www.udacity.com"
+            "url" : "http://www.umd.edu",
+            "location" : "College Park, MD, USA",
+            "details" : "BS Electrical Engineering",
+            "dates" : "1987 - 1989"
         },
         {
-            "title" : "Mobile Device Development",
-            "school" : "Anne Arundel Community College",
-            "dates" : "2015",
-            "url" : "http://www.aacc.edu"
+            "name" : "Udacity",
+            "url" : "http://www.udacity.com",
+            "location" : "",
+            "details" : "Front-End Web Development Nanodegree",
+            "dates" : "2015"
+        },
+        {
+            "name" : "Anne Arundel Community College",
+            "url" : "http://www.aacc.edu",
+            "location" : "",
+            "details" : "Mobile Device Development Certificate",
+            "dates" : "2015"
         }
     ]
 }
 
 // Resume Header  -------------
-addTitleAndContactInfo();
-addBio();
-
-// Work Experience ------------
-for (job in work.jobs)
-{
-    displayJob(job);
+bio.display = function() {
+    addNameAndTitle();
+    addContactInfo("#topContacts");
+    addBio();
+    addSkillsCatalog();
 }
 
+bio.display();
+
+// Work Experience ------------
+work.display = function() {
+    for (job in work.jobs)
+    {
+        displayJob(job);
+    }
+}
+
+work.display();
+
 // Projects -------------------
-// Per the instructions, create a 'display' property to encapsulate how projects are displayed.
 projects.display = function() {
     for (project in projects.projects)
     {
@@ -159,6 +193,10 @@ education.display = function() {
 }
 
 education.display();
+
+// Resume Footer  -------------
+addContactInfo("#footerContacts");
+
 
 // Map ------------------------
 $("#mapDiv").append(googleMap);

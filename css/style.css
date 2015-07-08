@@ -54,7 +54,7 @@ h2, h3, h4, h5 {
   font-size: 14px;
   color: #999999;
   line-height: 16px;
-  float: left;
+  float: right;
 }
 
 .location-text {

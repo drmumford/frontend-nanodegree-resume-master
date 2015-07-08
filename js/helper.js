@@ -26,7 +26,7 @@ var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</sp
 var HTMLbioPic = '<img src="%data%" class="biopic">';
 var HTMLWelcomeMsg = '<span class="welcome-message">%data%</span>';
 
-var HTMLskillsStart = '<h3 id="skillsH3">Skills at a Glance:</h3><ul id="skills" class="flex-box"></ul>';
+var HTMLskillsStart = '<h3 id="skillsH3">Skills:</h3><ul id="skills" class="flex-box"></ul>';
 var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
 
 var HTMLworkStart = '<div class="work-entry"></div>';
@@ -34,7 +34,7 @@ var HTMLworkEmployer = '<a href="#">%data%';
 var HTMLworkTitle = ' - %data%</a>';
 var HTMLworkDates = '<div class="date-text">%data%</div>';
 var HTMLworkLocation = '<div class="location-text">%data%</div>';
-var HTMLworkDescription = '<p><br>%data%</p>';
+var HTMLworkDescription = '<p>%data%</p>';
 
 var HTMLprojectStart = '<div class="project-entry"></div>';
 var HTMLprojectTitle = '<a href="#">%data%</a>';
@@ -43,20 +43,32 @@ var HTMLprojectDescription = '<p><br>%data%</p>';
 var HTMLprojectImage = '<img src="%data%" alt="%alt%">';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
-var HTMLschoolName = '<a href="#">%data%';
-var HTMLschoolDegree = ' -- %data%</a>';
+var HTMLschoolName = '<a href="%url%" target="_blank">%data%</a>';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
-var HTMLschoolMajor = '<em><br>Major: %data%</em>';
+var HTMLschoolDetails = '<em>%data%</em>';
+var OnlineSchoolLocation = "Online";
 
-var HTMLonlineClasses = '<h3>Online Classes</h3>';
-var HTMLonlineTitle = '<a href="#">%data%';
+var HTMLonlineTitle = '<a href="%url%" target="_blank">%data%</a>';
 var HTMLonlineSchool = ' - %data%</a>';
 var HTMLonlineDates = '<div class="date-text">%data%</div>';
-var HTMLonlineURL = '<br><a href="#">%data%</a>';
+var HTMLonlineDetails = '<em>%data%</em>';
 
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
+
+// Template to build text for location markers.
+var HTMLlocationMarker =  '<div id="content">' +
+                            '<h1 id="firstHeading" class="firstHeading">%name%</h1>' +
+                            '<div id="bodyContent">' +
+                              '<p><a href="https://en.wikipedia.org/wiki/%wikiPage%" target="_blank">' +
+                                'https://en.wikipedia.org/wiki/%wikiPage%</a></p>' +
+                            '</div>' +
+                          '</div>';
+
+// Keep track of the last clicked location marker so we can close it's
+// infoWindow when another location marker is clicked.
+var currentInfoWindow = null;
 
 /*
 The International Name challenge in Lesson 2 where you'll create a function that will need
@@ -93,8 +105,7 @@ This is the fun part. Here's where we generate the custom Google Map for the web
 See the documentation below for more details.
 https://developers.google.com/maps/documentation/javascript/reference
 */
-var map;    // declares a global map variable
-
+var map; // declares a global map variable
 
 /*
 Start here! initializeMap() is called when page is loaded.
@@ -124,15 +135,21 @@ function initializeMap() {
     locations.push(bio.contacts.location);
 
     // iterates through school locations and appends each location to
-    // the locations array
+    // the locations array; ignores online schools since they are, of
+    // course, global in nature.
     for (var school in education.schools) {
-      locations.push(education.schools[school].location);
+      if (education.schools[school].location != OnlineSchoolLocation) {
+        if ($.inArray(education.schools[school].location, locations) === -1) {
+          locations.push(education.schools[school].location);
+        }
+      }
     }
 
-    // iterates through work locations and appends each location to
-    // the locations array
+    // iterates through work locations and appends each location to the locations array.
     for (var job in work.jobs) {
-      locations.push(work.jobs[job].location);
+      if ($.inArray(work.jobs[job].location, locations) === -1) {
+        locations.push(work.jobs[job].location);
+      }
     }
 
     return locations;
@@ -158,40 +175,31 @@ function initializeMap() {
       title: name
     });
 
-    var contentString = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>'+
-      '<div id="bodyContent">'+
-      '<p><b>' + name + '</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-      'sandstone rock formation in the southern part of the '+
-      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-      'south west of the nearest large town, Alice Springs; 450&#160;km '+
-      '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-      'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-      'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-      'Aboriginal people of the area. It has many springs, waterholes, '+
-      'rock caves and ancient paintings. Uluru is listed as a World '+
-      'Heritage Site.</p>'+
-      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-      '(last visited June 22, 2009).</p>'+
-      '</div>'+
-      '</div>';
+    // Create some content for an infoWindow; the location name and Wikipedia's
+    // page for the location in a 'Town,_State' format
+    var wikiPage = name.replace(", USA", "").replace(/\s+/g, "_");
+    var contentString = HTMLlocationMarker.replace(/%name%/g, name).replace(/%wikiPage%/g, wikiPage);
 
-    // infoWindows are the little helper windows that open when you click
-    // or hover over a pin on a map. They usually contain more information
-    // about a location.
+    // Add an infoWindow to display when the user clicks the location.
     var infoWindow = new google.maps.InfoWindow({
-      content: contentString //displayInfo
+      content: contentString
     });
 
     // hmmmm, I wonder what this is about... Glad that you asked!
     // This morsel of code hooks up an event handler for markers on
     // the map. When a marker is clicked, it will run the code in
     // the anonymous function. We're going to open the infoWindow
-    // that's been created above.
+    // that's been created above after closing any infoWindow
+    // that is currently open.
     google.maps.event.addListener(marker, 'click', function() {
+
+      // Only show one location's info at a time. If there's an open info
+      // window, close it and save this handler's info window for later.
+      if (currentInfoWindow) {
+        currentInfoWindow.close();
+      }
+
+      currentInfoWindow = infoWindow;
       infoWindow.open(map, marker);
     });
 
@@ -219,7 +227,6 @@ function initializeMap() {
   and fires off Google place searches for each location
   */
   function pinPoster(locations) {
-
     // creates a Google place search service object. PlacesService does the work of
     // actually searching for location data.
     var service = new google.maps.places.PlacesService(map);
@@ -249,10 +256,6 @@ function initializeMap() {
   pinPoster(locations);
 }
 
-/*
-Uncomment the code below when you're ready to implement a Google Map!
-*/
-
 // Calls the initializeMap() function when the page loads
 window.addEventListener('load', initializeMap);
 
@@ -263,74 +266,72 @@ window.addEventListener('resize', function(e) {
   map.fitBounds(mapBounds);
 });
 
-
 //
-// Resume Header, part I.
-// Provides name / title / contact information.
+// Helper function that substitutes the 'info' appropriately into the given
+// html template. Then inserts the resulting element into the DOM element
+// that matches the given jQuery selector according to the given operation.
 //
-function addTitleAndContactInfo() {
+function addInfo(html, selector, info, op) {
 
-  var formattedName = HTMLheaderName.replace("%data%", bio.name);
-  var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-  $("#header").prepend(formattedRole);
-  $("#header").prepend(formattedName);
-
-  // Add a generic contact just for grins because it's there.
-  var formattedGeneric = HTMLcontactGeneric.replace("%contact%", bio.genericContact);
-  formattedGeneric = formattedGeneric.replace("%data%", bio.genericData);
-  $("#topContacts").append(formattedGeneric);
-
-  var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-  $("#topContacts").append(formattedMobile);
-
-  var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-  $("#topContacts").append(formattedEmail);
-
-  var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
-  $("#topContacts").append(formattedTwitter);
-
-  var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-  $("#topContacts").append(formattedGithub);
-
-  var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
-  $("#topContacts").append(formattedBlog);
-
-  var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-  $("#topContacts").append(formattedLocation);
+  if (info.length > 0) {
+    var formattedHtml = html.replace("%data%", info);
+    switch (op) {
+      case "prepend":
+        $(selector).prepend(formattedHtml);
+        break;
+      default:
+        $(selector).append(formattedHtml);
+    }
+  }
 }
 
 //
-// Resume Header, part II.
-// Provides profile picture / short bio / skills catalog.
+// Resume Header, part I: name / title.
+//
+function addNameAndTitle() {
+  // Prepend here so do these in 'reverse' order. Role first, then name.
+  addInfo(HTMLheaderRole, "#header", bio.role, "prepend");
+  addInfo(HTMLheaderName, "#header", bio.name, "prepend");
+ }
+
+//
+// Resume Header, part II: contact information.
+// Resume Footer: contact information.
+//
+function addContactInfo(selector) {
+  addInfo(HTMLcontactGeneric, selector, bio.genericContact);
+  addInfo(HTMLmobile, selector, bio.contacts.mobile);
+  addInfo(HTMLemail, selector, bio.contacts.email);
+  addInfo(HTMLtwitter, selector, bio.contacts.twitter);
+  addInfo(HTMLgithub, selector, bio.contacts.github);
+  addInfo(HTMLblog, selector, bio.contacts.blog);
+  addInfo(HTMLlocation, selector, bio.contacts.location);
+}
+
+//
+// Resume Header, part III: profile picture / bio.
 //
 function addBio() {
-
-  var profilePicture = HTMLbioPic.replace("%data%", bio.bioPic);
-  $("#header").append(profilePicture);
-
-  var formattedWelcomeMsg = HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage);
-  $("#header").append(formattedWelcomeMsg);
-
-  addSkillsCatalog(bio.skills);
+  addInfo(HTMLbioPic, "#header", bio.bioPic);
+  addInfo(HTMLWelcomeMsg, "#header", bio.welcomeMessage);
 }
 
 //
-// Add the skills in the given array to the resume.
+// Resume Header, part IV: skills catalog.
 //
-function addSkillsCatalog(skills) {
+function addSkillsCatalog() {
 
-  // Add skills to the bio, if any.
-  if (bio.skills.length > 0)
-  {
-    // Add a skills section header.
-    $("#header").append(HTMLskillsStart);
-
-    // Add each skill individually.
-    for (i = 0; i < skills.length; i++) {
-      var skill = HTMLskills.replace("%data%", skills[i]);
-      $("#skills").append(skill);
-    };
+  if (bio.skills.length === 0) {
+    return; // uh oh, no skillz.
   }
+
+  // Add a skills section header.
+  $("#header").append(HTMLskillsStart);
+
+  // Add each skill individually.
+  for (var i = 0; i < bio.skills.length; i++) {
+    addInfo(HTMLskills, "#skills", bio.skills[i].trim());
+  };
 }
 
 //
@@ -342,18 +343,15 @@ function displayJob(index) {
     $("#workExperience").append(HTMLworkStart);
 
     // Add this job's information.
+    var location =  work.jobs[index].location.replace(", USA", "");
+    addInfo(HTMLworkLocation, ".work-entry:last", location);
+
     var employer =  HTMLworkEmployer.replace("%data%", work.jobs[index].employer);
     var title =  HTMLworkTitle.replace("%data%", work.jobs[index].title);
     $(".work-entry:last").append(employer + title);
 
-    var dates = HTMLworkDates.replace("%data%", work.jobs[index].dates);
-    $(".work-entry:last").append(dates);
-
-    var location = HTMLworkLocation.replace("%data%", work.jobs[index].location);
-    $(".work-entry:last").append(location);
-
-    var description = HTMLworkDescription.replace("%data%", work.jobs[index].description);
-    $(".work-entry:last").append(description);
+    addInfo(HTMLworkDates, ".work-entry:last", work.jobs[index].dates);
+    addInfo(HTMLworkDescription, ".work-entry:last", work.jobs[index].description);
 }
 
 //
@@ -365,14 +363,9 @@ function displayProject(index) {
   $("#projects").append(HTMLprojectStart); // var HTMLprojectStart = '<div class="project-entry"></div>';
 
   // Add this job's information.
-  var title =  HTMLprojectTitle.replace("%data%", projects.projects[index].title);
-  $(".project-entry:last").append(title);
-
-  var dates = HTMLprojectDates.replace("%data%", projects.projects[index].dates);
-  $(".project-entry:last").append(dates);
-
-  var description = HTMLprojectDescription.replace("%data%", projects.projects[index].description);
-  $(".project-entry:last").append(description);
+  addInfo(HTMLprojectTitle, ".project-entry:last", projects.projects[index].title);
+  addInfo(HTMLprojectDates, ".project-entry:last", projects.projects[index].dates);
+  addInfo(HTMLprojectDescription, ".project-entry:last", projects.projects[index].description);
 
   // Add images for the project, if any.
   for (i = 0; i < projects.projects[index].images.length; i++) {
@@ -382,27 +375,27 @@ function displayProject(index) {
   };
 }
 
-//
 // Add the school whose index in the education.schools array matches the given index.
-//
 function displaySchool(index) {
 
   // Add a school header; each school gets it own header.
   $("#education").append(HTMLschoolStart);
 
   // Add this school's information.
-  var formattedSchoolName =  HTMLschoolName.replace("%data%", education.schools[index].name);
-  var formattedSchoolDegree =  HTMLschoolDegree.replace("%data%", education.schools[index].degree);
-  $(".education-entry:last").append(formattedSchoolName + formattedSchoolDegree);
+  if (education.schools[index].location === "") {
+    education.schools[index].location = OnlineSchoolLocation;
+  }
 
-  var dates = HTMLschoolDates.replace("%data%", education.schools[index].dates);
-  $(".education-entry:last").append(dates);
+  var location =  education.schools[index].location.replace(", USA", "");
+  addInfo(HTMLschoolLocation, ".education-entry:last", location);
 
-  var location = HTMLschoolLocation.replace("%data%", education.schools[index].location);
-  $(".education-entry:last").append(location);
+  var school = HTMLschoolName
+                  .replace("%data%", education.schools[index].name) // add school name / URL
+                  .replace("%url%", education.schools[index].url); // to the school name template.
+  $(".education-entry:last").append(school);
 
-  var major = HTMLschoolMajor.replace("%data%", education.schools[index].majors);
-  $(".education-entry:last").append(major);
+  addInfo(HTMLschoolDetails, ".education-entry:last", education.schools[index].details);
+  addInfo(HTMLschoolDates, ".education-entry:last", education.schools[index].dates);
 }
 
 // Function for internationalization exercise.
