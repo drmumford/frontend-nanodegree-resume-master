@@ -47,7 +47,7 @@ var HTMLschoolName = '<a href="%url%" target="_blank">%data%</a>';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
 var HTMLschoolDetails = '<em>%data%</em>';
-var OnlineSchoolLocation = "Online";
+var OnlineSchoolIcon = '<img class="icon" src="./images/mouse.svg" alt="Online Course" title="Course completed online">';
 
 var HTMLonlineTitle = '<a href="%url%" target="_blank">%data%</a>';
 var HTMLonlineSchool = ' - %data%</a>';
@@ -138,7 +138,7 @@ function initializeMap() {
     // the locations array; ignores online schools since they are, of
     // course, global in nature.
     for (var school in education.schools) {
-      if (education.schools[school].location != OnlineSchoolLocation) {
+      if (education.schools[school].online.toLowerCase() === 'no') {
         if ($.inArray(education.schools[school].location, locations) === -1) {
           locations.push(education.schools[school].location);
         }
@@ -382,15 +382,16 @@ function displaySchool(index) {
   $("#education").append(HTMLschoolStart);
 
   // Add this school's information.
-  if (education.schools[index].location === "") {
-    education.schools[index].location = OnlineSchoolLocation;
+  var icon = "";
+  if (education.schools[index].online.toLowerCase() === "yes") {
+      icon = " " + OnlineSchoolIcon;
   }
 
   var location =  education.schools[index].location.replace(", USA", "");
   addInfo(HTMLschoolLocation, ".education-entry:last", location);
 
   var school = HTMLschoolName
-                  .replace("%data%", education.schools[index].name) // add school name / URL
+                  .replace("%data%", education.schools[index].name + icon) // add school name / URL
                   .replace("%url%", education.schools[index].url); // to the school name template.
   $(".education-entry:last").append(school);
 

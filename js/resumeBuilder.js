@@ -41,9 +41,9 @@ var work = {
 var projects = {
     "projects" : [
         {
-            "title" : "Project 1",
-            "dates" : "6 weeks",
-            "description" : "Project 1 description",
+            "title" : "Online Portfolio",
+            "dates" : "June 2015",
+            "description" : "My online portfolio  completed as part of Udacity's Front-End Web Developer Nanodegree.",
 
             "images" : [
                 "http://www.ironwoodlife.com/portfolio/images/kitty1-400.jpg",
@@ -55,9 +55,9 @@ var projects = {
             ]
         },
         {
-            "title" : "Project 2",
-            "dates" : "6 weeks",
-            "description" : "Project 2 description",
+            "title" : "HTML Canvas Game",
+            "dates" : "July 2015",
+            "description" : "My take on the classic arcade game 'Frogger' completed as part of Udacity's Front-end Web Development course.",
 
             "images" : [
                 "http://www.ironwoodlife.com/portfolio/images/kitty2-400.jpg",
@@ -117,7 +117,7 @@ var bio = {
         "Design Patterns", "OOAD",
 
         "Digital/Analog Circuit Design",
-        "Project Management: Planning, Organizing, Controlling, Measuring",
+        "Project Management",
     ]
 }
 
@@ -127,6 +127,7 @@ var education = {
             "name" : "University of Vermont",
             "url" : "http://www.uvm.edu",
             "location" : "Burlington, VT",
+            "online" : "no",
             "details" : "Foundation Engineering Courses",
             "dates" : "1983 - 1985"
         },
@@ -134,20 +135,23 @@ var education = {
             "name" : "University of Maryland",
             "url" : "http://www.umd.edu",
             "location" : "College Park, MD, USA",
+            "online" : "no",
             "details" : "BS Electrical Engineering",
             "dates" : "1987 - 1989"
         },
         {
             "name" : "Udacity",
             "url" : "http://www.udacity.com",
-            "location" : "",
+            "location" : "Mountain View, CA, USA",
+            "online": "yes",
             "details" : "Front-End Web Development Nanodegree",
             "dates" : "2015"
         },
         {
             "name" : "Anne Arundel Community College",
             "url" : "http://www.aacc.edu",
-            "location" : "",
+            "location": "Arnold, MD, USA",
+            "online": "yes",
             "details" : "Mobile Device Development Certificate",
             "dates" : "2015"
         }
