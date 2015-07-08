@@ -290,8 +290,8 @@ function addInfo(html, selector, info, op) {
 //
 function addNameAndTitle() {
   // Prepend here so do these in 'reverse' order. Role first, then name.
-  addInfo(HTMLheaderRole, "#header", bio.role, "prepend");
-  addInfo(HTMLheaderName, "#header", bio.name, "prepend");
+  addInfo(HTMLheaderRole, "header", bio.role, "prepend");
+  addInfo(HTMLheaderName, "header", bio.name, "prepend");
  }
 
 //
@@ -312,8 +312,8 @@ function addContactInfo(selector) {
 // Resume Header, part III: profile picture / bio.
 //
 function addBio() {
-  addInfo(HTMLbioPic, "#header", bio.bioPic);
-  addInfo(HTMLWelcomeMsg, "#header", bio.welcomeMessage);
+  addInfo(HTMLbioPic, "header", bio.bioPic);
+  addInfo(HTMLWelcomeMsg, "header", bio.welcomeMessage);
 }
 
 //
@@ -326,7 +326,7 @@ function addSkillsCatalog() {
   }
 
   // Add a skills section header.
-  $("#header").append(HTMLskillsStart);
+  $("header").append(HTMLskillsStart);
 
   // Add each skill individually.
   for (var i = 0; i < bio.skills.length; i++) {
