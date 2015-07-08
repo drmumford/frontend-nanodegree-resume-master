@@ -87,7 +87,7 @@ var bio = {
         "location" : "Severna Park, MD, USA"
     },
 
-    "bioPic" : "http://www.ironwoodlife.com/profile.png",
+    "bioPic" : "http://www.ironwoodlife.com/resume/images/profile.png",
 
     "skills" : [
 
