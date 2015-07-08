@@ -113,13 +113,8 @@ a {
     background-color: #4A4A4A;
 }
 
-/* TODO: Replace with image later */
-header {
-    background-color: #484848;
-}
-
 .wrapper {
-    border: 1px solid #484848;
+    border: 1px solid #4A4A4A;
 }
 
 .flex-box {
