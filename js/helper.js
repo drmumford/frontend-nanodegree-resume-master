@@ -39,7 +39,7 @@ var HTMLworkDescription = '<p>%data%</p>';
 var HTMLprojectStart = '<div class="project-entry"></div>';
 var HTMLprojectTitle = '<a href="#">%data%</a>';
 var HTMLprojectDates = '<div class="date-text">%data%</div>';
-var HTMLprojectDescription = '<p><br>%data%</p>';
+var HTMLprojectDescription = '<p>%data%</p>';
 var HTMLprojectImage = '<img src="%data%" alt="%alt%">';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
@@ -363,8 +363,8 @@ function displayProject(index) {
   $("#projects").append(HTMLprojectStart); // var HTMLprojectStart = '<div class="project-entry"></div>';
 
   // Add this job's information.
-  addInfo(HTMLprojectTitle, ".project-entry:last", projects.projects[index].title);
   addInfo(HTMLprojectDates, ".project-entry:last", projects.projects[index].dates);
+  addInfo(HTMLprojectTitle, ".project-entry:last", projects.projects[index].title);
   addInfo(HTMLprojectDescription, ".project-entry:last", projects.projects[index].description);
 
   // Add images for the project, if any.
