@@ -42,6 +42,7 @@ var projects = {
     "projects" : [
         {
             "title" : "Online Portfolio",
+            "url" : "http://www.ironwoodlife.com/portfolio",
             "dates" : "June 2015",
             "description" : "My online portfolio  completed as part of Udacity's Front-End Web Developer Nanodegree.",
 
@@ -56,8 +57,9 @@ var projects = {
         },
         {
             "title" : "HTML Canvas Game",
+            "url" : "http://www.ironwoodlife.com/frogger",
             "dates" : "July 2015",
-            "description" : "My take on the classic arcade game 'Frogger' completed as part of Udacity's Front-end Web Development course.",
+            "description": "My take on the classic arcade game 'Frogger' completed as part of Udacity's Front-end Web Developer Nanodegree.",
 
             "images" : [
                 "http://www.ironwoodlife.com/portfolio/images/kitty2-400.jpg",

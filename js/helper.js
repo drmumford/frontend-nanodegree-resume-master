@@ -37,10 +37,10 @@ var HTMLworkLocation = '<div class="location-text">%data%</div>';
 var HTMLworkDescription = '<p>%data%</p>';
 
 var HTMLprojectStart = '<div class="project-entry"></div>';
-var HTMLprojectTitle = '<a href="#">%data%</a>';
+var HTMLprojectTitle = '<a href="%url%" target="_blank">%data%</a>';
 var HTMLprojectDates = '<div class="date-text">%data%</div>';
 var HTMLprojectDescription = '<p>%data%</p>';
-var HTMLprojectImage = '<img src="%data%" alt="%alt%">';
+var HTMLprojectImage = '<img class="img-responsive col-xs-12 col-sm-6 text-center" src="%data%" alt="%alt%">';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
 var HTMLschoolName = '<a href="%url%" target="_blank">%data%</a>';
@@ -362,9 +362,11 @@ function displayProject(index) {
   // Add a project header; each project gets it own header.
   $("#projects").append(HTMLprojectStart); // var HTMLprojectStart = '<div class="project-entry"></div>';
 
-  // Add this job's information.
+  // Add this project's information.
   addInfo(HTMLprojectDates, ".project-entry:last", projects.projects[index].dates);
-  addInfo(HTMLprojectTitle, ".project-entry:last", projects.projects[index].title);
+
+  var projectTitle = HTMLprojectTitle.replace("%url%", projects.projects[index].url);
+  addInfo(projectTitle, ".project-entry:last", projects.projects[index].title);
   addInfo(HTMLprojectDescription, ".project-entry:last", projects.projects[index].description);
 
   // Add images for the project, if any.
@@ -384,17 +386,14 @@ function displaySchool(index) {
   // Add this school's information.
   var icon = "";
   if (education.schools[index].online.toLowerCase() === "yes") {
-      icon = " " + OnlineSchoolIcon;
+      icon = " " + OnlineSchoolIcon; // Online courses are designated by a computer mouse icon.
   }
 
   var location =  education.schools[index].location.replace(", USA", "");
   addInfo(HTMLschoolLocation, ".education-entry:last", location);
 
-  var school = HTMLschoolName
-                  .replace("%data%", education.schools[index].name + icon) // add school name / URL
-                  .replace("%url%", education.schools[index].url); // to the school name template.
-  $(".education-entry:last").append(school);
-
+  var schoolName = HTMLschoolName.replace("%url%", education.schools[index].url);
+  addInfo(schoolName, ".education-entry:last", education.schools[index].name + icon);
   addInfo(HTMLschoolDetails, ".education-entry:last", education.schools[index].details);
   addInfo(HTMLschoolDates, ".education-entry:last", education.schools[index].dates);
 }
