@@ -13,11 +13,21 @@
     padding-right: 5%;
 }
 
+hr {
+    padding: 0;
+    border-width: 1px;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
 h1 {
+    font-family: 'Roboto', sans-serif;
     font-size: 40px;
+    font-weight: bold;
     color: #F5A623;
     line-height: 48px;
     display: inline;
+    margin: 0;
 }
 
 h2 {
@@ -25,7 +35,6 @@ h2 {
     font-size: 24px;
     color: #999999;
     line-height: 29px;
-    padding: 10px;
 }
 
 h3 {
@@ -44,8 +53,8 @@ h4 {
 
 h2, h3, h4, h5 {
     padding: 10px;
-    /*padding-left: 5%;
-    padding-right: 5%;*/
+    padding-right: 5%;
+    margin: 0;
 }
 
 .date-text {
@@ -82,10 +91,12 @@ a {
     font-size: 18px;
     color: #F3F3F3;
     line-height: 28px;
+    margin: 0;
 }
 
-#skillsH3 {
+.skillsH3 {
     color: #F5AE23;
+    margin: 0;
     display: none;
 }
 
@@ -123,13 +134,11 @@ a {
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 10px;
+    margin: 0;
 }
 
 .center-content {
-    padding-top: 2.5%;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 2.5%;
+    padding: 2.5% 5%;
 }
 
 ul {
@@ -158,8 +167,6 @@ span {
 #map {
     display: block;
     height: 100%;
-    /*margin-left: 5%;*/
-    /*margin-right: 5%;*/
 }
 
 #mapDiv {

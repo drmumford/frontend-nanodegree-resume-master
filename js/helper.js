@@ -25,7 +25,7 @@ var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</sp
 var HTMLbioPic = '<img src="%data%" class="biopic" alt="Candidate Image">';
 var HTMLWelcomeMsg = '<span class="welcome-message">%data%</span>';
 
-var HTMLskillsStart = '<h3 id="skillsH3">Skills:</h3><ul id="skills" class="flex-box"></ul>';
+var HTMLskillsStart = '<h3 class="skillsH3">Skills:</h3><ul id="skills" class="flex-box"></ul>';
 var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
 
 var HTMLworkStart = '<div class="work-entry"></div>';
@@ -39,7 +39,7 @@ var HTMLprojectStart = '<div class="project-entry"></div>';
 var HTMLprojectTitle = '<a href="%url%" target="_blank">%data%</a>';
 var HTMLprojectDates = '<div class="date-text">%data%</div>';
 var HTMLprojectDescription = '<p>%data%</p>';
-var HTMLprojectImage = '<img class="img-responsive col-xs-12 col-sm-6 text-center" src="%data%" alt="%alt%">';
+var HTMLprojectImage = '<img class="img-responsive col-xs-12 col-sm-6 col-md-4" src="%data%" alt="%alt%">';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
 var HTMLschoolName = '<a href="%url%" target="_blank">%data%</a>';
@@ -352,19 +352,32 @@ function displayProject(index) {
     // Add a project header; each project gets it own header.
     $("#projects").append(HTMLprojectStart);
 
+    var project = projects.projects[index];
+
     // Add this project's information.
-    addInfo(HTMLprojectDates, ".project-entry:last", projects.projects[index].dates);
+    addInfo(HTMLprojectDates, ".project-entry:last", project.dates);
 
-    var projectTitle = HTMLprojectTitle.replace("%url%", projects.projects[index].url);
-    addInfo(projectTitle, ".project-entry:last", projects.projects[index].title);
-    addInfo(HTMLprojectDescription, ".project-entry:last", projects.projects[index].description);
+    var projectTitle = HTMLprojectTitle.replace("%url%", project.url);
+    addInfo(projectTitle, ".project-entry:last", project.title);
+    addInfo(HTMLprojectDescription, ".project-entry:last", project.description);
 
-    // Add images for the project, if any.
-    for (i = 0; i < projects.projects[index].images.length; i++) {
-        var image = HTMLprojectImage.replace("%data%", projects.projects[index].images[i]);
-        image = image.replace("%alt%", projects.projects[index].imagesAlt[i]); // add alt text; come on, man!
-        $(".project-entry:last").append(image);
+    // Add responsive images, if any.
+    var addedRow = false;
+    for (i = 0; i < project.images.length; i++) {
+        // Add a bootstrap row; just once on the first iteration.
+        if (i === 0) {
+            $(".project-entry:last").append("<div class=\"row\">");
+            addedRow = true;
+        }
+        var image = HTMLprojectImage.replace("%data%", project.images[i]);
+        image = image.replace("%alt%", project.imagesAlt[i]); // add alt text; come on, man!
+        $(".row:last").append(image);
     };
+
+    // Finish off our bootstrap row, if necessary.
+    if (addedRow) {
+        $(".img:last").append("</div>");
+    }
 }
 
 // Add the school whose index in the education.schools array matches the given index.
