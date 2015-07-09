@@ -1,71 +1,71 @@
 var work = {
-    "jobs" : [
+    "jobs": [
         {
-            "employer" : "Denro, Inc.",
-            "title" : "Design Engineer",
-            "location" : "Gaithersburg, MD, USA",
-            "dates" : "Nov 1989 - Oct 1998",
-            "description" : "Designed electrical circuits for Air Traffic Control systems."
+            "employer": "Denro, Inc.",
+            "title": "Design Engineer",
+            "location": "Gaithersburg, MD, USA",
+            "dates": "Nov 1989 - Oct 1998",
+            "description": "Designed electrical circuits for Air Traffic Control systems."
         },
         {
-            "employer" : "Acterna, Inc.",
-            "title" : "Software Engineer",
-            "location" : "Germantown, MD, USA",
-            "dates" : "Nov 1998 - March 2003",
-            "description" : "Developed SW for telecommunication test equipment."
+            "employer": "Acterna, Inc.",
+            "title": "Software Engineer",
+            "location": "Germantown, MD, USA",
+            "dates": "Nov 1998 - March 2003",
+            "description": "Developed SW for telecommunication test equipment."
         },
         {
-            "employer" : "TCNI",
-            "title" : "Sr. Software Engineer",
-            "location" : "Germantown, MD, USA",
-            "dates" : "March 2003 - March 2004",
-            "description" : "Developed SW for the US Navy."
+            "employer": "TCNI",
+            "title": "Sr. Software Engineer",
+            "location": "Germantown, MD, USA",
+            "dates": "March 2003 - March 2004",
+            "description": "Developed SW for the US Navy."
         },
         {
-            "employer" : "Sonix",
-            "title" : "Independent Contractor / Principal Software Engineer",
-            "location" : "Springfield, VA, USA",
-            "dates" : "March 2004 - March 2006",
-            "description" : "Developed SW for Scanning Acoustic Microscopes."
+            "employer": "Sonix",
+            "title": "Independent Contractor / Principal Software Engineer",
+            "location": "Springfield, VA, USA",
+            "dates": "March 2004 - March 2006",
+            "description": "Developed SW for Scanning Acoustic Microscopes."
         },
         {
-            "employer" : "GreenHill",
-            "title" : "Sr. Software Engineer",
-            "location" : "Germantown, MD, USA",
-            "dates" : "March 2006 - June 2011",
-            "description" : "Developed investment performance measurement applications."
+            "employer": "GreenHill",
+            "title": "Sr. Software Engineer",
+            "location": "Germantown, MD, USA",
+            "dates": "March 2006 - June 2011",
+            "description": "Developed investment performance measurement applications."
         }
     ]
 }
 
 var projects = {
-    "projects" : [
+    "projects": [
         {
-            "title" : "Online Portfolio",
-            "url" : "http://www.ironwoodlife.com/portfolio",
-            "dates" : "June 2015",
-            "description" : "My online portfolio  completed as part of Udacity's Front-End Web Developer Nanodegree.",
+            "title": "Online Portfolio",
+            "url": "http://www.ironwoodlife.com/portfolio",
+            "dates": "June 2015",
+            "description": "My online portfolio  completed as part of Udacity's Front-End Web Developer Nanodegree.",
 
-            "images" : [
+            "images": [
                 "http://www.ironwoodlife.com/portfolio/images/kitty1-400.jpg",
                 "http://www.ironwoodlife.com/portfolio/images/kitty2-400.jpg"
             ],
-            "imagesAlt" : [
+            "imagesAlt": [
                 "The BEFORE image of my first project",
                 "The AFTER image of my first project"
             ]
         },
         {
-            "title" : "HTML Canvas Game",
-            "url" : "http://www.ironwoodlife.com/frogger",
-            "dates" : "July 2015",
+            "title": "HTML Canvas Game",
+            "url": "http://www.ironwoodlife.com/frogger",
+            "dates": "July 2015",
             "description": "My take on the classic arcade game 'Frogger' completed as part of Udacity's Front-end Web Developer Nanodegree.",
 
-            "images" : [
+            "images": [
                 "http://www.ironwoodlife.com/portfolio/images/kitty2-400.jpg",
                 "http://www.ironwoodlife.com/portfolio/images/kitty3-400.jpg"
             ],
-            "imagesAlt" : [
+            "imagesAlt": [
                 "The BEFORE image of my second project",
                 "The AFTER image of my second project"
             ]
@@ -74,24 +74,24 @@ var projects = {
 }
 
 var bio = {
-    "genericContact" : "",
-    "genericData" : "",
-    "name" : "David R. Mumford",
-    "role" : "Front-End Web Developer",
-    "welcomeMessage" : "Results driven developer with a proven ability to create world-class products for my employers.",
+    "genericContact": "",
+    "genericData": "",
+    "name": "David R. Mumford",
+    "role": "Front-End Web Developer",
+    "welcomeMessage": "Results driven developer with a proven ability to create world-class products for my employers.",
 
-    "contacts" : {
-        "mobile" : "301.318.3516",
-        "email" : "David.Royal.Mumford@gmail.com",
-        "twitter" : "drmumford",
-        "github" : "drmumford",
-        "blog" : "", // no current blog.
-        "location" : "Severna Park, MD, USA"
+    "contacts": {
+        "mobile": "301.318.3516",
+        "email": "David.Royal.Mumford@gmail.com",
+        "twitter": "drmumford",
+        "github": "drmumford",
+        "blog": "", // no current blog.
+        "location": "Severna Park, MD, USA"
     },
 
-    "bioPic" : "http://www.ironwoodlife.com/resume/images/profile.png",
+    "bioPic": "http://www.ironwoodlife.com/resume/images/profile.png",
 
-    "skills" : [
+    "skills": [
 
         // Languages.
         "C#", "VB.NET", "C++", "C", "XML", "HTML5", "CSS3", "JavaScript", "PHP", "SQL", "JQuery", "Bootstrap", "PostScript",
@@ -100,7 +100,7 @@ var bio = {
         "SQL Server", "MySQL",
 
         // Libraries and Tools.
-        "Visual Studio",  "MS Project",
+        "Visual Studio", "MS Project",
 
         "Apache",
 
@@ -114,7 +114,7 @@ var bio = {
 
         "Windows", "Unix (Solaris)", "Linux (Red Hat)",
 
-        "LINQ",  "Serialization",
+        "LINQ", "Serialization",
 
         "Design Patterns", "OOAD",
 
@@ -124,44 +124,44 @@ var bio = {
 }
 
 var education = {
-    "schools" : [ // NOTE: Leave location blank for online schools.
+    "schools": [ // NOTE: Leave location blank for online schools.
         {
-            "name" : "University of Vermont",
-            "url" : "http://www.uvm.edu",
-            "location" : "Burlington, VT",
-            "online" : "no",
-            "details" : "Foundation Engineering Courses",
-            "dates" : "1983 - 1985"
+            "name": "University of Vermont",
+            "url": "http://www.uvm.edu",
+            "location": "Burlington, VT",
+            "online": "no",
+            "details": "Foundation Engineering Courses",
+            "dates": "1983 - 1985"
         },
         {
-            "name" : "University of Maryland",
-            "url" : "http://www.umd.edu",
-            "location" : "College Park, MD, USA",
-            "online" : "no",
-            "details" : "BS Electrical Engineering",
-            "dates" : "1987 - 1989"
+            "name": "University of Maryland",
+            "url": "http://www.umd.edu",
+            "location": "College Park, MD, USA",
+            "online": "no",
+            "details": "BS Electrical Engineering",
+            "dates": "1987 - 1989"
         },
         {
-            "name" : "Udacity",
-            "url" : "http://www.udacity.com",
-            "location" : "Mountain View, CA, USA",
+            "name": "Udacity",
+            "url": "http://www.udacity.com",
+            "location": "Mountain View, CA, USA",
             "online": "yes",
-            "details" : "Front-End Web Development Nanodegree",
-            "dates" : "2015"
+            "details": "Front-End Web Development Nanodegree",
+            "dates": "2015"
         },
         {
-            "name" : "Anne Arundel Community College",
-            "url" : "http://www.aacc.edu",
+            "name": "Anne Arundel Community College",
+            "url": "http://www.aacc.edu",
             "location": "Arnold, MD, USA",
             "online": "yes",
-            "details" : "Mobile Device Development Certificate",
-            "dates" : "2015"
+            "details": "Mobile Device Development Certificate",
+            "dates": "2015"
         }
     ]
 }
 
 // Resume Header  -------------
-bio.display = function() {
+bio.display = function () {
     addNameAndTitle();
     addContactInfo("#topContacts");
     addBio();
@@ -171,9 +171,8 @@ bio.display = function() {
 bio.display();
 
 // Work Experience ------------
-work.display = function() {
-    for (job in work.jobs)
-    {
+work.display = function () {
+    for (job in work.jobs) {
         displayJob(job);
     }
 }
@@ -181,9 +180,8 @@ work.display = function() {
 work.display();
 
 // Projects -------------------
-projects.display = function() {
-    for (project in projects.projects)
-    {
+projects.display = function () {
+    for (project in projects.projects) {
         displayProject(project);
     }
 }
@@ -191,9 +189,8 @@ projects.display = function() {
 projects.display();
 
 // Education ------------------
-education.display = function() {
-    for (school in education.schools)
-    {
+education.display = function () {
+    for (school in education.schools) {
         displaySchool(school);
     }
 }
@@ -202,7 +199,6 @@ education.display();
 
 // Resume Footer  -------------
 addContactInfo("#footerContacts");
-
 
 // Map ------------------------
 $("#mapDiv").append(googleMap);
