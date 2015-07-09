@@ -51,8 +51,8 @@ var projects = {
                 "http://www.ironwoodlife.com/portfolio/images/kitty2-400.jpg"
             ],
             "imagesAlt": [
-                "The BEFORE image of my first project",
-                "The AFTER image of my first project"
+                "A screenshot from the project",
+                "Another screenshot from the project"
             ]
         },
         {
@@ -66,8 +66,8 @@ var projects = {
                 "http://www.ironwoodlife.com/portfolio/images/kitty3-400.jpg"
             ],
             "imagesAlt": [
-                "The BEFORE image of my second project",
-                "The AFTER image of my second project"
+                "A screenshot from the game",
+                "Another screenshot from the game"
             ]
         }
     ]
