@@ -142,20 +142,20 @@ var education = {
             "dates": "1987 - 1989"
         },
         {
-            "name": "Udacity",
-            "url": "http://www.udacity.com",
-            "location": "Mountain View, CA, USA",
-            "online": "yes",
-            "details": "Front-End Web Development Nanodegree",
-            "dates": "2015"
-        },
-        {
             "name": "Anne Arundel Community College",
             "url": "http://www.aacc.edu",
             "location": "Arnold, MD, USA",
             "online": "yes",
             "details": "Mobile Device Development Certificate",
-            "dates": "2015"
+            "dates": "July 2015"
+        },
+        {
+            "name": "Udacity",
+            "url": "http://www.udacity.com",
+            "location": "Mountain View, CA, USA",
+            "online": "yes",
+            "details": "Front-End Web Development Nanodegree",
+            "dates": "Aug 2015"
         }
     ]
 }
