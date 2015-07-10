@@ -124,7 +124,7 @@ var bio = {
 }
 
 var education = {
-    "schools": [ // NOTE: Leave location blank for online schools.
+    "schools": [
         {
             "name": "University of Vermont",
             "url": "http://www.uvm.edu",
