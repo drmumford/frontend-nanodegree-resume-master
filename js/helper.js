@@ -267,7 +267,7 @@ window.addEventListener('resize', function (e) {
 //
 function addInfo(html, selector, info, op) {
     if (info.length > 0) {
-        var formattedHtml = html.replace("%data%", info);
+        var formattedHtml = html.replace(/%data%/g, info);
         switch (op) {
             case "prepend":
                 $(selector).prepend(formattedHtml);
