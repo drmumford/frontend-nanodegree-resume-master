@@ -386,17 +386,18 @@ function displaySchool(index) {
     $("#education").append(HTMLschoolStart);
 
     // Add this school's information.
-    var icon = "";
-    if (education.schools[index].online.toLowerCase() === "yes") {
-        icon = " " + OnlineSchoolIcon; // Online courses are designated by a computer mouse icon.
-    }
-
     var location = education.schools[index].location.replace(", USA", "");
     addInfo(HTMLschoolLocation, ".education-entry:last", location);
 
     var schoolName = HTMLschoolName.replace("%url%", education.schools[index].url);
-    addInfo(schoolName, ".education-entry:last", education.schools[index].name + icon);
+    addInfo(schoolName, ".education-entry:last", education.schools[index].name);
     addInfo(HTMLschoolDetails, ".education-entry:last", education.schools[index].details);
+
+    // Online courses are designated by a computer mouse icon; add it if applicable.
+    if (education.schools[index].online.toLowerCase() === "yes") {
+        $(".education-entry:last").append(" " + OnlineSchoolIcon);
+    }
+
     addInfo(HTMLschoolDates, ".education-entry:last", education.schools[index].dates);
 }
 
