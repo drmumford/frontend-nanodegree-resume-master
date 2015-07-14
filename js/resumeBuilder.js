@@ -1,6 +1,13 @@
 var work = {
     "jobs": [
         {
+            "employer": "Sonix",
+            "title": "Independent Contractor / Principal Software Engineer",
+            "location": "Springfield, VA, USA",
+            "dates": "July 2011 - May 2015",
+            "description": "Developed SW for Scanning Acoustic Microscopes."
+        },
+        {
             "employer": "GreenHill",
             "title": "Sr. Software Engineer",
             "location": "Germantown, MD, USA",
