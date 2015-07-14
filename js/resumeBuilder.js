@@ -1,25 +1,11 @@
 var work = {
     "jobs": [
         {
-            "employer": "Denro, Inc.",
-            "title": "Design Engineer",
-            "location": "Gaithersburg, MD, USA",
-            "dates": "Nov 1989 - Oct 1998",
-            "description": "Designed electrical circuits for Air Traffic Control systems."
-        },
-        {
-            "employer": "Acterna, Inc.",
-            "title": "Software Engineer",
-            "location": "Germantown, MD, USA",
-            "dates": "Nov 1998 - March 2003",
-            "description": "Developed SW for telecommunication test equipment."
-        },
-        {
-            "employer": "TCNI",
+            "employer": "GreenHill",
             "title": "Sr. Software Engineer",
             "location": "Germantown, MD, USA",
-            "dates": "March 2003 - March 2004",
-            "description": "Developed SW for the US Navy."
+            "dates": "March 2006 - June 2011",
+            "description": "Developed investment performance measurement applications."
         },
         {
             "employer": "Sonix",
@@ -29,11 +15,25 @@ var work = {
             "description": "Developed SW for Scanning Acoustic Microscopes."
         },
         {
-            "employer": "GreenHill",
+            "employer": "TCNI",
             "title": "Sr. Software Engineer",
             "location": "Germantown, MD, USA",
-            "dates": "March 2006 - June 2011",
-            "description": "Developed investment performance measurement applications."
+            "dates": "March 2003 - March 2004",
+            "description": "Developed SW for the US Navy."
+        },
+        {
+            "employer": "Acterna, Inc.",
+            "title": "Software Engineer",
+            "location": "Germantown, MD, USA",
+            "dates": "Nov 1998 - March 2003",
+            "description": "Developed SW for telecommunication test equipment."
+        },
+        {
+            "employer": "Denro, Inc.",
+            "title": "Design Engineer",
+            "location": "Gaithersburg, MD, USA",
+            "dates": "Nov 1989 - Oct 1998",
+            "description": "Designed electrical circuits for Air Traffic Control systems."
         }
     ]
 }
