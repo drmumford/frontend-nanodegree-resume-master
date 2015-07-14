@@ -63,6 +63,7 @@ h2, h3, h4, h5 {
     color: #999999;
     line-height: 16px;
     float: right;
+    margin-left: 20px;
 }
 
 .location-text {
@@ -164,7 +165,7 @@ span {
     text-align: center;
 }
 
-#map {
+.map {
     display: block;
     height: 100%;
 }
@@ -179,4 +180,17 @@ span {
     height: 18px;
     width: 18px;
     padding: 0;
+}
+
+.section-header {
+    padding-bottom: 0;
+}
+
+.map-header {
+    padding-bottom: 10px;
+}
+
+.work-title {
+    color: #999999;
+    font-weight: 500 ;
 }

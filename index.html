@@ -19,16 +19,16 @@
         </header>
         <main style="clear: both;">
             <section id="workExperience" class="gray">
-                <h2>Work Experience</h2>
+                <h2 class="section-header">Work Experience</h2>
             </section>
             <section id="projects">
-                <h2>Projects</h2>
+                <h2 class="section-header">Projects</h2>
             </section>
             <section id="education" class="gray">
-                <h2>Education</h2>
+                <h2 class="section-header">Education</h2>
             </section>
             <section id="mapDiv">
-                <h2>Where I've Lived and Worked</h2>
+                <h2 class="map-header">Where I've Lived and Worked</h2>
             </section>
         </main>
         <footer id="letsConnect" class="dark-gray">
@@ -57,7 +57,7 @@
         if (document.getElementsByClassName('education-entry').length === 0) {
             document.getElementById('education').style.display = 'none';
         }
-        if (document.getElementById('map') === null) {
+        if (document.getElementByClassName('map') === null) {
             document.getElementById('mapDiv').style.display = 'none';
         }
     </script>

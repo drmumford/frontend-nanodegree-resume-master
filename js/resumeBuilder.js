@@ -2,45 +2,120 @@ var work = {
     "jobs": [
         {
             "employer": "Sonix",
-            "title": "Independent Contractor / Principal Software Engineer",
+            "url": "http://www.sonix.com",
             "location": "Springfield, VA, USA",
-            "dates": "July 2011 - May 2015",
-            "description": "Developed SW for Scanning Acoustic Microscopes."
+            "positions": [
+                {
+                    "title": "Principal Software Engineer",
+                    "dates": "May 2012 - May 2015",
+                    "accomplishments": [
+                        "Developed SW for Scanning Acoustic Microscopes as a full-time employee.",
+                    ]
+                },
+                {
+                    "title": "Independent Contractor",
+                    "dates": "July 2011 - April 2012",
+                    "accomplishments": [
+                        "Developed SW for Scanning Acoustic Microscopes as a contractor."
+                    ]
+                }
+            ]
         },
         {
             "employer": "GreenHill",
-            "title": "Sr. Software Engineer",
+            "url": "http://info.ghill.com",
             "location": "Germantown, MD, USA",
-            "dates": "March 2006 - June 2011",
-            "description": "Developed investment performance measurement applications."
+            "positions": [
+                {
+                    "title": "Sr. Software Engineer",
+                    "dates": "June 2006 - June 2011",
+                    "accomplishments": [
+                        "Designed and implemented a financial performance measurement reporting application. Major components included an SSIS library for ETL of legacy data, SSRS reporting engine, and WinForm/ASP.NET user interfaces.",
+                        "Within 4 months, the application led to a 7% increase in total clients and a 5.8% increase in annual revenue.",
+                        "Conceived, designed and implemented an application to transform competitor's data into GreenHill's data format. This reduced the costs for potential clients to transfer their accounts to GreenHill. In its first year, it led directly to 6 new clients and $150K increase in annual revenue.",
+                        "Identified new technologies (SSIS, SSRS), implemented new processes (Agile/Scrum) and brought new tools (OnTime) to the development team.",
+                        "Managed two summer co-ops for two summers.",
+                        "Initiated 'Lunch Bunch' discussions as a way to introduce and expand .NET knowledge among all team members."
+                    ]
+                }
+            ]
         },
         {
             "employer": "Sonix",
-            "title": "Independent Contractor / Principal Software Engineer",
+            "url": "http://www.sonix.com",
             "location": "Springfield, VA, USA",
-            "dates": "March 2004 - March 2006",
-            "description": "Developed SW for Scanning Acoustic Microscopes."
+            "positions": [
+                {
+                    "title": "Principal Software Engineer",
+                    "dates": "June 2005 - May 2006",
+                    "accomplishments": [
+                        "Developed SW for Scanning Acoustic Microscopes as a full-time employee.",
+                    ]
+                },
+                {
+                    "title": "Independent Contractor",
+                    "dates": "March 2004 - May 2005",
+                    "accomplishments": [
+                        "Developed SW for Scanning Acoustic Microscopes as a contractor."
+                    ]
+                }
+            ]
         },
         {
             "employer": "TCNI",
-            "title": "Sr. Software Engineer",
+            "url": "#",
             "location": "Germantown, MD, USA",
-            "dates": "March 2003 - March 2004",
-            "description": "Developed SW for the US Navy."
+            "positions": [
+                {
+                    "title": "Sr. Software Engineer",
+                    "dates": "June 2003 - February 2004",
+                    "accomplishments": [
+                        "Developed SW for the US Navy."
+                    ]
+                }
+            ]
+        },
+        {
+            "employer": "Sonix",
+            "url": "http://www.sonix.com",
+            "location": "Springfield, VA, USA",
+            "positions": [
+                {
+                    "title": "Independent Contractor",
+                    "dates": "April 2003 - May 2003",
+                    "accomplishments": [
+                        "Developed SW for Scanning Acoustic Microscopes as a contractor."
+                    ]
+                }
+            ]
         },
         {
             "employer": "Acterna, Inc.",
-            "title": "Software Engineer",
+            "url": "#",
             "location": "Germantown, MD, USA",
-            "dates": "Nov 1998 - March 2003",
-            "description": "Developed SW for telecommunication test equipment."
+            "positions": [
+                {
+                    "title": "Software Engineer",
+                    "dates": "Nov 1996 - March 2003",
+                    "accomplishments": [
+                        "Developed SW for telecommunication test equipment."
+                    ]
+                }
+            ]
         },
         {
             "employer": "Denro, Inc.",
-            "title": "Design Engineer",
+            "url": "#",
             "location": "Gaithersburg, MD, USA",
-            "dates": "Nov 1989 - Oct 1998",
-            "description": "Designed electrical circuits for Air Traffic Control systems."
+            "positions": [
+                {
+                    "title": "Design Engineer",
+                    "dates": "Nov 1989 - Oct 1996",
+                    "accomplishments": [
+                        "Designed electrical circuits for Air Traffic Control systems."
+                    ]
+                }
+            ]
         }
     ]
 }

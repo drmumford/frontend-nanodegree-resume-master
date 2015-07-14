@@ -19,11 +19,11 @@ var HTMLskillsStart = '<h3 class="skillsH3">Skills:</h3><ul id="skills" class="f
 var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
 
 var HTMLworkStart = '<div class="work-entry"></div>';
-var HTMLworkEmployer = '<a href="#">%data%';
-var HTMLworkTitle = ' - %data%</a>';
-var HTMLworkDates = '<div class="date-text">%data%</div>';
+var HTMLworkEmployer = '<a href="%url%" target="_blank">%data%</a>';
 var HTMLworkLocation = '<div class="location-text">%data%</div>';
-var HTMLworkDescription = '<p>%data%</p>';
+var HTMLworkTitle = '<div class="work-title">%data%</div>';
+var HTMLworkDates = '<div class="date-text">%data%</div>';
+var HTMLworkAccomplishments = '<p>%data%</p>';
 
 var HTMLprojectStart = '<div class="project-entry"></div>';
 var HTMLprojectTitle = '<a href="%url%" target="_blank">%data%</a>';
@@ -44,7 +44,7 @@ var HTMLonlineDates = '<div class="date-text">%data%</div>';
 var HTMLonlineDetails = '<em>%data%</em>';
 
 var internationalizeButton = '<button>Internationalize</button>';
-var googleMap = '<div id="map"></div>';
+var googleMap = '<div class="map"></div>';
 
 // Template to build text for location markers.
 var HTMLlocationMarker = '<div id="content">' +
@@ -106,13 +106,12 @@ function initializeMap() {
 
     // This next line makes `map` a new Google Map JavaScript Object and attaches it to
     // <div id="map">, which is appended as part of an exercise late in the course.
-    map = new google.maps.Map(document.querySelector('#map'), mapOptions);
+    map = new google.maps.Map(document.querySelector('.map'), mapOptions);
 
     //
     // Returns an array of each unique location from the JSONs
     // written for bio, education, and work.
     function locationFinder() {
-
         var locations = [];
 
         // Add the single location property from bio to the locations array
@@ -320,16 +319,28 @@ function displayJob(index) {
     // Add a job header; each job gets it own header.
     $("#workExperience").append(HTMLworkStart);
 
+    var job = work.jobs[index];
+
     // Add this job's information.
-    var location = work.jobs[index].location.replace(", USA", "");
+    var location = job.location.replace(", USA", "");
     addInfo(HTMLworkLocation, ".work-entry:last", location);
 
-    var employer = HTMLworkEmployer.replace("%data%", work.jobs[index].employer);
-    var title = HTMLworkTitle.replace("%data%", work.jobs[index].title);
-    $(".work-entry:last").append(employer + title);
+    var employer = HTMLworkEmployer.replace("%url%", work.jobs[index].url);
+    addInfo(employer, ".work-entry:last", job.employer);
 
-    addInfo(HTMLworkDates, ".work-entry:last", work.jobs[index].dates);
-    addInfo(HTMLworkDescription, ".work-entry:last", work.jobs[index].description);
+    for (i = 0; i < job.positions.length; i++) {
+        addInfo(HTMLworkDates, ".work-entry:last", job.positions[i].dates);
+        var title = HTMLworkTitle.replace("%data%", job.positions[i].title);
+        $(".work-entry:last").append(title);
+
+        // Add work accomplishments.
+        var accomplishments = " ";
+        for (j = 0; j < job.positions[i].accomplishments.length; j++) {
+            accomplishments += job.positions[i].accomplishments[j] + "<br>";
+        };
+
+        addInfo(HTMLworkAccomplishments, ".work-entry:last", accomplishments);
+    };
 }
 
 //
