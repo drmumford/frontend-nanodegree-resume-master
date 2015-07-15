@@ -30,9 +30,8 @@ var work = {
                     "title": "Sr. Software Engineer",
                     "dates": "June 2006 - June 2011",
                     "accomplishments": [
-                        "Designed and implemented a financial performance measurement reporting application. Major components included an SSIS library for ETL of legacy data, SSRS reporting engine, and WinForm/ASP.NET user interfaces.",
-                        "Within 4 months, the application led to a 7% increase in total clients and a 5.8% increase in annual revenue.",
-                        "Conceived, designed and implemented an application to transform competitor's data into GreenHill's data format. This reduced the costs for potential clients to transfer their accounts to GreenHill. In its first year, it led directly to 6 new clients and $150K increase in annual revenue.",
+                        "Designed and implemented a financial performance measurement reporting application. Major components included an SSIS library for ETL of legacy data, SSRS reporting engine, and WinForm/ASP.NET user interfaces. Within 4 months, the application led to a 7% increase in total clients and a 5.8% increase in annual revenue.",
+                        "Conceived, designed and implemented an application to transform potential clients data in a competitor's data format to GreenHill's data format. This reduced the cost for potential clients to transfer their accounts to GreenHill. In its first year, it led directly to 6 new clients and $150K increase in annual revenue.",
                         "Identified new technologies (SSIS, SSRS), implemented new processes (Agile/Scrum) and brought new tools (OnTime) to the development team.",
                         "Managed two summer co-ops for two summers.",
                         "Initiated 'Lunch Bunch' discussions as a way to introduce and expand .NET knowledge among all team members."
