@@ -61,7 +61,6 @@ h2, h3, h4, h5 {
     font-style: italic;
     font-size: 14px;
     color: #999999;
-    line-height: 16px;
     float: right;
     margin-left: 20px;
 }
@@ -70,8 +69,8 @@ h2, h3, h4, h5 {
     font-style: italic;
     font-size: 14px;
     color: #999999;
-    line-height: 16px;
     float: right;
+    margin-left: 20px;
 }
 
 p {
